@@ -13,7 +13,7 @@ app_secret = "19ba5a2bd42b4cbcabe4647a0ab508a6"  # DO NOT SHARE WITH ANYONE!
 group_id = "10487409466"
 
 # input date formatted as YYYY-MM-DD
-since_date = "2015-01-01"
+since_date = "2017-06-20"
 until_date = "2017-06-23"
 
 access_token = app_id + "|" + app_secret
