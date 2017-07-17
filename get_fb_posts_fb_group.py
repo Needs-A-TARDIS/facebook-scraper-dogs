@@ -113,7 +113,9 @@ def processFacebookPageFeedStatus(status):
         datetime.timedelta(hours=-5)  # EST
     status_published = status_published.strftime(
         '%Y-%m-%d %H:%M:%S')  # best time format for spreadsheet programs
-    status_author = unicode_decode(status['from']['name'])
+    # status_author = unicode_decode(status['from']['name'])
+    status_author = '' if 'from' not in status else \
+        unicode_decode(status['from']['name'])
 
     # Nested items require chaining dictionary keys.
 
@@ -173,7 +175,8 @@ def scrapeFacebookPageFeedStatus(group_id, access_token, since_date, until_date)
                     # calculate thankful/pride through algebra
                     #num_special = status_data[7] - sum(reactions_data)
                     #w.writerow(status_data + reactions_data + (num_special,))
-
+                    w.writerow(status_data + reactions_data)
+					
                 # output progress occasionally to make sure code is not
                 # stalling
                 num_processed += 1
