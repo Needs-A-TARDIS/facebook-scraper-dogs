@@ -13,9 +13,9 @@ app_secret = "19ba5a2bd42b4cbcabe4647a0ab508a6"  # DO NOT SHARE WITH ANYONE!
 group_id = "10487409466"
 
 # input date formatted as YYYY-MM-DD
-since_date = "2017-06-20"
+since_date = "2015-06-20"
 until_date = "2017-06-23"
-
+interest_words = ['doggo','pupper','woofer']
 access_token = app_id + "|" + app_secret
 
 
@@ -99,6 +99,10 @@ def processFacebookPageFeedStatus(status):
 
     status_message = '' if 'message' not in status else \
         unicode_decode(status['message'])
+    #check to see if message contains any words of interest -- if not, return a blank status
+    if not(any([x in status_message for x in interest_words])):
+        #return a dummy status if none of the words were found 
+        return ('empty', '', '', '', '', '', 0, 0, 0, 0)
     link_name = '' if 'name' not in status else \
         unicode_decode(status['name'])
     status_link = '' if 'link' not in status else \
@@ -170,12 +174,14 @@ def scrapeFacebookPageFeedStatus(group_id, access_token, since_date, until_date)
                 # Ensure it is a status with the expected metadata
                 if 'reactions' in status:
                     status_data = processFacebookPageFeedStatus(status)
-                    reactions_data = reactions[status_data[0]]
+					#temp not get reactions data 
+                    #reactions_data = reactions[status_data[0]]
 
                     # calculate thankful/pride through algebra
                     #num_special = status_data[7] - sum(reactions_data)
                     #w.writerow(status_data + reactions_data + (num_special,))
-                    w.writerow(status_data + reactions_data)
+                    #w.writerow(status_data + reactions_data)
+                    w.writerow(status_data)
 					
                 # output progress occasionally to make sure code is not
                 # stalling
