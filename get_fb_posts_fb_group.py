@@ -11,11 +11,11 @@ except ImportError:
 app_id = "1331188560268773"
 app_secret = "19ba5a2bd42b4cbcabe4647a0ab508a6"  # DO NOT SHARE WITH ANYONE!
 group_id = "10487409466"
-
+group_title= "Dogspotting"
 # input date formatted as YYYY-MM-DD
-since_date = "2015-01-01"
-until_date = "2017-06-23"
-interest_words = ['doggo','pupper','woofer']
+since_date = "2011-01-01"
+until_date = "2013-01-01"
+interest_words = ['doggo','pupper','woofer','boof','smol']
 access_token = app_id + "|" + app_secret
 
 
@@ -134,7 +134,7 @@ def processFacebookPageFeedStatus(status):
 
 
 def scrapeFacebookPageFeedStatus(group_id, access_token, since_date, until_date):
-    with open('{}_facebook_statuses.csv'.format(group_id), 'w') as file:
+    with open('{}_{}_f{}_t{}_facebook_statuses_filtered.csv'.format(group_id,group_title,since_date,until_date), 'w') as file:
         w = csv.writer(file)
         w.writerow(["status_id", "status_message", "status_author", "link_name",
                     "status_type", "status_link", "status_published",
